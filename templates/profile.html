@@ -1,0 +1,44 @@
+{% extends 'baseDashboard.html' %}
+{% load static %}
+{% block title %} | Akun {% endblock title %}
+
+{% block sidebar %}
+{% include "sidebarAdmin.html" %}
+{% endblock sidebar %}
+
+{% block body %}
+
+<h1 class='h3 mt-3 text-gray-800 text-center'>Update Akun</h1>
+<h3 class='h6 text-gray-400 text-center'>Role : {{ user.role }} </h3>
+
+<form class="card shadow-lg my-3" method='POST' action=" {% url 'saveAccount' user.username %} ">
+{% comment %} <form class="card shadow-lg my-3" method='POST' action="#"> {% endcomment %}
+     {% csrf_token %}
+     <div class="input-group p-3 py-2 mt-3 mb-1">
+          <span class="input-group-text w-25" id="basic-addon1">Username</span>
+          <input type="text" class="form-control" name="username" value="{{user.username}}" aria-label="Username" aria-describedby="basic-addon1">
+     </div>
+     <div class="input-group p-3 py-2 my-1">
+          <span class="input-group-text w-25" id="basic-addon1">Password</span>
+          <input type="password" class="form-control" name="password" value="{{user.password}}" aria-label="password" aria-describedby="basic-addon1">
+     </div>
+     <div class="input-group p-3 py-2 my-1">
+          <span class="input-group-text w-25" id="basic-addon1">Nama</span>
+          <input type="text" class="form-control" name="name" value="{{user.name}}" aria-label="name" aria-describedby="basic-addon1">
+     </div>
+     <div class="input-group p-3 py-2 my-1">
+          <span class="input-group-text w-25" id="basic-addon1">Alamat</span>
+          <input type="text" class="form-control" name="address" value="{{user.address}}" aria-label="address" aria-describedby="basic-addon1">
+     </div>
+     <div class="input-group p-3 py-2 my-1">
+          <span class="input-group-text w-25" id="basic-addon1">Nomor Ponsel</span>
+          <input type="text" class="form-control" name="phone" value="{{user.phone}}" aria-label="phone" aria-describedby="basic-addon1">
+     </div>
+     <div class="input-group p-3 py-2 my-1">
+          <span class="input-group-text w-25" id="basic-addon1">Telegram ID</span>
+          <input type="text" class="form-control" name="telegram" value="{{user.telegram}}" aria-label="telegram" aria-describedby="basic-addon1">
+     </div>
+     <button type='submit' class='btn btn-primary p-2 m-3 rounded-2 d-grid'>Simpan</button>
+</form>
+
+{% endblock body%}

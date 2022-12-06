@@ -1,0 +1,61 @@
+{% extends 'baseDashboard.html' %}
+{% load static %}
+{% block title %} | Supplier {% endblock title %}
+
+{% block sidebar %}
+{% include "sidebarAdmin.html" %}
+{% endblock sidebar %}
+
+{% block body %}
+
+<h1 class='h3 mt-3 text-gray-800 text-center'>Detail Transaksi</h1>
+<h3 class='h6 text-gray-400 text-center'>Tanggal : {{ order.orderDate }} | ID : {{ order.id }}</h3>
+<h3 class='h5 mt-3 text-gray-400'>Supplier : {{order.supplier }} </h3>
+<h3 class='h5 mt-3 text-gray-400'>Tujuan : {{order.bengkel }} </h3>
+
+<h3 class='h5 mt-3 text-gray-400'>Bukti Pembayaran : </h3>
+{% if order.bukti != "" and order.bukti != null %}
+<a class="demo01 text-black d-flex" href="{{order.bukti.url}}">Lihat Gambar</a>
+
+{% else %} 
+     <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+     <button type="submit" class="btn btn-primary btn-sm mt-2 d-flex">Upload</button>
+     </form> 
+     {% comment %} <form action=" {% url 'updateTransaksi' order.id %} " method='POST' class='d-grid' enctype="multipart/form-data"> 
+          {% csrf_token %}
+          <label for="image" class="form-label"></label>
+          <div class="input-group mb-3">
+               <span class="input-group-text" id="basic-addon3">Unggah bukti pembayaran</span>
+               <input type="file" class="form-control" name="image" autofocus required>
+          </div>
+          <button type='submit' class='btn btn-primary my-2 rounded-2 d-grid'>Simpan</button>
+     </form> {% endcomment %}
+{% endif %}
+
+<h1 class='h3 mt-0 text-gray-800 text-center'>Transaksi Produk</h1>
+{% if transaksi %}
+     <div class="row row-cols-1 row-cols-md-3 g-4">    
+     {% for i in transaksi %}
+     <div class="col">
+     <div class="card shadow ">
+          <img src="{{i.product.image.url}}" class="card-img-top mx-auto d-block mt-3 shadow-lg" style="width: 300px; height: 180px; object-fit: cover;">
+          <div class="card-body">
+               <h5 class="card-title text-center"><b>{{i.product.name}}</b></h5>
+               <p class='my-1'><b>Brand:</b> {{i.product.brand.name}}</p>
+               <p class='my-1'><b>Kategori:</b> {{i.product.category.all|join:", " }}</p>
+               <p class="my-1 card-text"><b>Deskripsi:</b> {{i.product.description}} </p>
+               <p class='my-1 text-center'><b>Harga: {{i.product.price}}</b></p>
+               <p class='btn btn-primary d-block'>Jumlah order : {{i.quantity}} </p>
+          </div>
+     </div>
+     </div>
+     
+     {% endfor %}
+     </div>
+{% else %}
+     <h3 class='h6 text-gray-400 text-center mt-5'>Tidak ada transaksi atau terjadi eror</h3>
+{% endif %}
+
+{% endblock body%}

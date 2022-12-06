@@ -1,0 +1,41 @@
+{% extends 'baseDashboard.html' %}
+{% load static %}
+{% block title %} | Bengkel {% endblock title %}
+
+{% block sidebar %}
+{% include "sidebarAdmin.html" %}
+{% endblock sidebar %}
+
+
+
+{% block body %}
+
+<h1 class='h3 mt-0 text-gray-800 text-center'>Edit Pasokan</h1>
+
+
+<div class="card shadow w-100 my-4">
+     <img src="{{stock.product.image.url}}" class="card-img-top mx-auto d-block mt-3 shadow-lg" style="width: 300px; height: 180px; object-fit: cover;">
+     <div class="card-body">
+          <h5 class="card-title text-center"><b>{{stock.product.name}}</b></h5>
+          <h6 class="text-sm-start">Dipasok oleh  {{stock.product.supplier.name}}</h6>
+          <h6 class='btn btn-dark btn-sm rounded-2'>Jumlah : {{stock.stockCount}} </h6>
+          {% comment %} <h6 class='btn  btn-sm rounded-2 {% if stock.stockCount < stock.minStock %}btn-danger {% else %}btn-secondary{% endif %}'>Minimum  : {{stock.minStock}} </h6>  {% endcomment %}
+          <form action=" {% url 'saveStock' stock.id %} " method='POST' class='d-grid'> {% csrf_token %}
+          <label for="minStock" class="form-label"></label>
+          <div class="input-group mb-3">
+               <span class="input-group-text" id="basic-addon3">Minimal pasok</span>
+               <input type="number" class="form-control" name="minStock" value="{{stock.minStock}}" autofocus required>
+          </div>
+          
+
+          <p class='my-1'><b>Brand:</b> {{stock.product.brand.name}}</p>
+          <p class='my-1'><b>Kategori:</b> {{stock.product.category.all|join:", " }}</p>
+          <p class="my-1 card-text"><b>Deskripsi:</b> {{stock.product.description}} </p>
+          <p class='my-1 text-center'><b>Harga: {{stock.product.price}}</b></p>
+          <button type='submit' class='btn btn-primary my-2 rounded-2 d-grid'>Simpan</button>
+          </form>
+     </div>
+</div>
+
+
+{% endblock body%}

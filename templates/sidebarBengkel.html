@@ -1,0 +1,24 @@
+<!-- Nav Item - Bengkel -->
+<li class='nav-item'>
+<a class='nav-link' href="{% url 'bengkel' %}">
+     <i class="bi bi-gear"></i>
+     <span>Bengkelku</span>
+</a>
+</li>
+
+<!-- Nav Item - SUPPLIER -->
+<li class='nav-item'>
+     <a class='nav-link' href="{% url 'supplier' %}">
+          <i class="bi bi-shop"></i>
+          <span>Supplier</span>
+     </a>
+</li>
+
+
+<!-- Nav Item - PENAWARAN -->
+<li class='nav-item'>
+     <a class='nav-link' href="{% url 'penawaran' request.user.id %}">
+          <i class="bi bi-chat-dots"></i>
+          <span>Penawaran</span>
+     </a>
+</li>

@@ -1,0 +1,23 @@
+{% extends 'baseDashboard.html' %}
+{% load static %}
+{% block title %} | Penawaran {% endblock title %}
+
+{% block sidebar %}
+{% include "sidebarAdmin.html" %}
+{% endblock sidebar %}
+
+
+
+{% block body %}
+<h1 class='h3 mt-4 text-gray-800'>Tambah Data Penawaran</h1>
+
+<div class="form-group">
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="d-grid"><button type="submit" class="btn btn-primary">Kirim</button>
+    </div>
+    
+</form>
+</div>
+{% endblock body%}

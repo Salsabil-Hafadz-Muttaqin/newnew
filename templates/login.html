@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} E-SCM | Login{% endblock title %}
+{% block body %}
+<div class='card mt-5 mb-5 w-75 p-3 mx-auto'>
+        <div class='card-body '>
+            <form action="{% url 'login' %}" method='POST'>
+                {% csrf_token %}
+                <h2 class="text-center m-5">Login</h2>
+                <div class='form-group input-group m-4'>
+                    <div class='input-group-prepend'>
+                        <span class='input-group-text mx-3'>
+                            <i class='fa fa-user'></i>
+                        </span>
+                    </div>
+                    <input class='form-control' type='text' name='username' placeholder='Username' autofocus>
+                </div>
+                <div class='form-group input-group m-4'>
+                    <div class='input-group-prepend'>
+                        <span class='input-group-text mx-3'>
+                            <i class='fa fa-lock'></i>
+                        </span>
+                    </div>
+                    <input class='form-control' type='password' name='password' placeholder='Password'>
+                </div>
+                {% if message %}
+                <div class="alert alert-danger text-center mx-auto" role="alert">
+                    {{ message }}
+                </div>
+                {% endif %}
+                <div class='input-group mb-3 mt-5 text-center'>
+                    <button type='submit' class='btn btn-primary mx-auto px-5'>Log In</button> 
+                </div>
+                
+                <p class='mx-auto text-center'>Belum masuk? Hubungi admin! <br>
+                     atau <a href="{% url 'index' %}" class='text-muted'>Kembali</a>
+                                                                    
+            </form>
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,144 @@
+{% extends 'baseDashboard.html' %}
+{% load static %}
+{% block title %} | {{ user.username }} {% endblock title %}
+
+{% block sidebar %}
+{% include "sidebarAdmin.html" %}
+{% endblock sidebar %}
+
+
+
+{% block body %}
+<h1 class='h3 mb-4 text-gray-800'>Selamat datang, {{user.username}}!</h1>
+
+{% comment %} Header {% endcomment %}
+    <div class='row'>
+    
+        <div class='col-xl-3 col-md-6 mb-4'>
+            <div class='card border-left-blue shadow h-100 py-2'>
+                <div class='card-body'>
+                    <div class='row no-gutters align-items-center'>
+                        <div class='col mr-2'>
+                            <div class='text-xs font-weight-bold text-primary text-uppercase mb-1'>
+                                Bengkel
+                            </div>
+                            <div class='h5 mb-0 font-weight-bold text-gray-800'>
+                                {{bengkel_count}}
+                            </div>
+                        </div>
+                        <div class='col-auto'>
+                            <i class='bi bi-gear fa-2x text-gray-300'></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='col-xl-3 col-md-6 mb-4'>
+            <div class='card border-left-orange shadow h-100 py-2'>
+                <div class='card-body'>
+                    <div class='row no-gutters align-items-center'>
+                        <div class='col mr-2'>
+                            <div class='text-xs font-weight-bold text-primary text-uppercase mb-1'>
+                                Supplier
+                            </div>
+                            <div class='h5 mb-0 font-weight-bold text-gray-800'>
+                                {{supplier_count}}
+                            </div>
+                        </div>
+                        <div class='col-auto'>
+                            <i class='bi bi-shop fa-2x text-gray-300'></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='col-xl-3 col-md-6 mb-4'>
+            <div class='card border-left-green shadow h-100 py-2'>
+                <div class='card-body'>
+                    <div class='row no-gutters align-items-center'>
+                        <div class='col mr-2'>
+                            <div class='text-xs font-weight-bold text-primary text-uppercase mb-1'>
+                                Produk
+                            </div>
+                            <div class='h5 mb-0 font-weight-bold text-gray-800'>
+                                {{product_count}}
+                            </div>
+                        </div>
+                        <div class='col-auto'>
+                            <i class='bi bi-box fa-2x text-gray-300'></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='col-xl-3 col-md-6 mb-4'>
+            <div class='card border-left-red shadow h-100 py-2'>
+                <div class='card-body'>
+                    <div class='row no-gutters align-items-center'>
+                        <div class='col mr-2'>
+                            <div class='text-xs font-weight-bold text-primary text-uppercase mb-1'>
+                                Perlu Stock
+                            </div>
+                            <div class='h5 mb-0 font-weight-bold text-gray-800'>
+                                {{need_stock}}
+                            </div>
+                        </div>
+                        {% if need_stock > 0 %}
+                         <div class='col-auto'>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#dc3545" class="bi bi-bookmark-x-fill" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zM6.854 5.146a.5.5 0 1 0-.708.708L7.293 7 6.146 8.146a.5.5 0 1 0 .708.708L8 7.707l1.146 1.147a.5.5 0 1 0 .708-.708L8.707 7l1.147-1.146a.5.5 0 0 0-.708-.708L8 6.293 6.854 5.146z"/>
+                         </svg>
+                        </div>
+                        {% else %}
+                        <div class='col-auto'>
+                            <i class='fbi bi-bookmark-x fa-2x text-gray-300'></i>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% comment %} isi dashboard {% endcomment %}
+<h2 class='h4 mt-2 mb-4 text-gray-800'>Transaksi dan penawaran</h2>
+{% comment %} <div class="bd-callout bd-callout-info">
+<strong>This is an info callout.</strong> Example text to show it in action.
+</div> {% endcomment %}
+ <div class='card border-left-green h-100 py-2 mb-3'>
+                <div class='card-body'>
+                    <div class='row no-gutters align-items-center'>
+                        <div class='h5 mb-0 font-weight-bold text-gray-800'>
+                            Jumlah transaksi dalam setahun terakhir : {{transaksi_setahun}} 
+                        </div>
+                    </div>
+                </div>
+</div>
+
+{% comment %} isi dashboard {% endcomment %}
+
+ <div class='card border-left-blue h-100 py-2 mb-3'>
+                <div class='card-body'>
+                    <div class='row no-gutters align-items-center'>
+                        <div class='h5 mb-0 font-weight-bold text-gray-800'>
+                            Jumlah penawaran terbaru dalam setahun terakhir : {{penawaran_today}} 
+                        </div>
+                    </div>
+                </div>
+</div>
+
+<h2 class='h4 mt-4 mb-4 text-gray-800'>Informasi supplier</h2>
+<div class='card border-left-orange h-100 py-2 mb-3'>
+                <div class='card-body'>
+                    <div class='row no-gutters align-items-center'>
+                        <div class='h5 mb-0 font-weight-bold text-gray-800'>
+                            Terdapat {{produk_tambahan_today}} produk baru yang ditambahkan oleh supplier hari ini
+                        </div>
+                    </div>
+                </div>
+</div>
+{% endblock body %}

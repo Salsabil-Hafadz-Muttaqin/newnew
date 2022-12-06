@@ -1,0 +1,41 @@
+{% extends 'baseDashboard.html' %}
+{% load static %}
+{% block title %} | Supplier {% endblock title %}
+
+{% block sidebar %}
+{% include "sidebarAdmin.html" %}
+{% endblock sidebar %}
+
+
+
+{% block body %}
+<h1 class='h3 mt-3 text-gray-800 text-center'>Supplier {{ supplier.name }} </h1>
+<h3 class='h6 text-gray-400 text-center'>{{supplier.address}} Telepon {{supplier.contact}}</h3>
+<h3 class='h5 mt-3 text-gray-400'>Bos : {{supplier.owner.name }} </h3>
+<h6 class='btn btn-success btn-sm rounded-4'>WhatsApp : {{supplier.owner.phone }} </h6>
+<h6 class='btn btn-primary btn-sm rounded-4'>Telegram : {{supplier.owner.telegram }} </h6>
+
+<h1 class='h3 mt-0 text-gray-800 text-center'>Produk</h1>
+{% if product %}
+     <div class="row row-cols-1 row-cols-md-3 g-4">    
+     {% for i in product %}
+     <div class="col">
+     <div class="card shadow ">
+          <img src="{{i.image.url}}" class="card-img-top mx-auto d-block mt-3 shadow-lg" style="width: 300px; height: 180px; object-fit: cover;">
+          <div class="card-body">
+               <h5 class="card-title text-center"><b>{{i.name}}</b></h5>
+               <p class='my-1'><b>Brand:</b> {{i.brand.name}}</p>
+               <p class='my-1'><b>Kategori:</b> {{i.category.all|join:", " }}</p>
+               <p class="my-1 card-text"><b>Deskripsi:</b> {{i.description}} </p>
+               <p class='my-1 text-center'><b>Harga: {{i.price}}</b></p>
+          </div>
+     </div>
+     </div>
+     
+     {% endfor %}
+     </div>
+{% else %}
+     <h3 class='h6 text-gray-400 text-center mt-5'>Tidak ada produk</h3>
+{% endif %}
+
+{% endblock body%}

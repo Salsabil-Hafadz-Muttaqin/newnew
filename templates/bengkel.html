@@ -1,0 +1,37 @@
+{% extends 'baseDashboard.html' %}
+{% load static %}
+{% block title %} | Bengkel {% endblock title %}
+
+{% block sidebar %}
+{% include "sidebarAdmin.html" %}
+{% endblock sidebar %}
+
+
+
+{% block body %}
+<h1 class='h3 mt-4 text-gray-800'>Data Bengkel</h1>
+<table class="table table-striped table-hover mt-3">
+  <thead>
+    <tr>
+      <th scope="col">Nama Bengkel</th>
+      <th scope="col">Alamat</th>
+      <th scope="col">Pemilik</th>
+      <th scope="col">Detail</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in bengkel %}
+     <tr>
+      <th scope="row">{{i.name}} </th>
+      <td>{{i.address}}</td>
+      <td>{{i.owner.name}}</td>
+      <td><a class="btn btn-light shadow" href="{% url 'bengkelDetail' i.id %}">Info</a></td>
+    </tr>
+    {% endfor %}
+</tbody>
+
+
+</table>
+
+
+{% endblock body%}

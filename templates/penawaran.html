@@ -1,0 +1,40 @@
+{% extends 'baseDashboard.html' %}
+{% load static %}
+{% block title %} | Penawaran {% endblock title %}
+
+{% block sidebar %}
+{% include "sidebarAdmin.html" %}
+{% endblock sidebar %}
+
+
+
+{% block body %}
+<h1 class='h3 mt-4 text-gray-800'>Data Penawaran</h1>
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <a class="btn btn-dark rounded-3 btn-sm" href=" {% url 'penawaranCreate' request.user.id %} ">Tambah data</a>
+</div>
+<table class="table table-striped table-hover mt-3">
+  <thead>
+    <tr>
+      <th class="text-center" scope="col">Tanggal</th>
+      <th class="text-center" scope="col">Penawar</th>
+      <th class="text-center" scope="col">Tujuan</th>
+      <th class="text-center" scope="col">Deskripsi</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in penawaran %}
+     <tr>
+      <th class="text-center" scope="row">{{i.tawarDate}} </th>
+      <td class="text-center"> {% if i.penawar == request.user %} <p class='fs-6'> Anda </p> {% else %} {{i.penawar}} <a class='btn btn-sm btn-success rounded-4 my-1'> {{i.penawar.phone}} </a>{% endif %}</td>
+      <td class="text-center"> {% if i.tujuan == request.user %} <p class='fs-6'> Anda </p> {% else %} {{i.tujuan}} <a class='btn btn-sm btn-success rounded-4 my-1'> {{i.tujuan.phone}} </a> {% endif %}</td>
+      <td>{{i.deskripsi}}</td>
+    </tr>
+    {% endfor %}
+</tbody>
+
+
+</table>
+
+
+{% endblock body%}
